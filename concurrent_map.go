@@ -118,6 +118,9 @@ func (m ConcurrentMap[K, V]) Get(key K) (V, bool) {
 
 // Count returns the number of elements within the map.
 func (m ConcurrentMap[K, V]) Count() int {
+	if m.IsNil() {
+		return 0
+	}
 	count := 0
 	for i := 0; i < SHARD_COUNT; i++ {
 		shard := m.shards[i]
@@ -181,11 +184,14 @@ func (m ConcurrentMap[K, V]) Pop(key K) (v V, exists bool) {
 
 // IsEmpty checks if map is empty.
 func (m ConcurrentMap[K, V]) IsEmpty() bool {
+	if m.IsNil() {
+		return true
+	}
 	return m.Count() == 0
 }
 
 // IsEmpty checks if map is nil.
-func (m ConcurrentMap[K, V]) isNil() bool {
+func (m ConcurrentMap[K, V]) IsNil() bool {
 	return m.shards == nil
 }
 
