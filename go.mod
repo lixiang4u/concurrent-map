@@ -1,3 +1,3 @@
-module github.com/orcaman/concurrent-map/v2
+module github.com/lixiang4u/concurrent-map/v2
 
-go 1.18
+go 1.23.2
