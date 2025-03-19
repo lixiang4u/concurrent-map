@@ -184,6 +184,11 @@ func (m ConcurrentMap[K, V]) IsEmpty() bool {
 	return m.Count() == 0
 }
 
+// IsEmpty checks if map is nil.
+func (m ConcurrentMap[K, V]) isNil() bool {
+	return m.shards == nil
+}
+
 // Used by the Iter & IterBuffered functions to wrap two variables together over a channel,
 type Tuple[K comparable, V any] struct {
 	Key K
